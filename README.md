@@ -9,15 +9,13 @@ back to your village.  Along the way, you will collect simellas, as well as
 various items that will help you deal with monsters, which you may
 fight or flee...*
 
-![Boohu introduction screen](https://download.tuxfamily.org/boohu/intro-screen-tiles.png)
+Website
+-------
 
-Screenshot and Website
-----------------------
-
-[![Introduction Screeshot](https://download.tuxfamily.org/boohu/screenshot.png)](https://download.tuxfamily.org/boohu/index.html)
+![Boohu introduction screen](https://raw.codeberg.page/anaseto/games/boohu/intro-screen-tiles.png)
 
 You can visit the [game's
-website](https://download.tuxfamily.org/boohu/index.html)
+website](https://anaseto.codeberg.page/games/boohu)
 for more informations, tips, screenshots and asciicasts. You will also be able
 to play in the browser and download pre-built binaries for the latest release.
 
