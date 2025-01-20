@@ -12,7 +12,7 @@ fight or flee...*
 Website
 -------
 
-![Boohu introduction screen](https://raw.codeberg.page/anaseto/games/boohu/intro-screen-tiles.png)
+![Boohu introduction screen](https://anaseto.codeberg.page/games/boohu/intro-screen-tiles.png)
 
 You can visit the [game's
 website](https://anaseto.codeberg.page/games/boohu)
