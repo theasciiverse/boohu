@@ -43,7 +43,8 @@ but has more limited functionality.
 
 ### Tiles
 
-You can build a graphical version depending on Tcl/Tk (8.6) using this command:
+You can build a graphical version depending on
+[Tcl/Tk](https://www.tcl-lang.org/) (8.6) using this command:
 
 	go build --tags tk
 
