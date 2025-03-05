@@ -21,26 +21,21 @@ for more information and tips about the game.
 Install from Sources
 --------------------
 
-In all cases, you need first to perform the following preliminaries:
-
-+ Install the [go compiler](https://golang.org/).
-+ Add `$(go env GOPATH)/bin` to your `$PATH` (for example `export PATH="$PATH:$(go env GOPATH)/bin"`).
+First, you need to install the [go compiler](https://golang.org/), so that the
+`go` command is available.
 
 ### ASCII
 
 You can build a native ASCII version from source by using this command:
 
-    go install
+    go build
 
-Alternatively, you may use the `go build -o /path/to/bin/boohu` to put the
-resulting binary in a particular place.
+You should now have a working `boohu` executable in the current directory. Use
+the `--help` option for command-line usage.
   
-The `boohu` command should now be available (you may have to rename it to
-remove the `.git` suffix).
-
 The only dependency outside of the go standard library is the
 curses-like library [tcell](https://github.com/gdamore/tcell), which is
-installed automatically by the previous `go install` command.
+installed automatically by the previous `go build` command.
 
 *Portability note.* If you want to avoid a dependency, try adding `--tags ansi`
 to the `go install` command. It will work on POSIX systems with a `stty` command,
@@ -50,7 +45,7 @@ but has more limited functionality.
 
 You can build a graphical version depending on Tcl/Tk (8.6) using this command:
 
-	go install --tags tk
+	go build --tags tk
 
 This will install the [gothic](https://codeberg.org/anaseto/gothic) Go bindings
 for Tcl/Tk. You need to install Tcl/Tk first.
