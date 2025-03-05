@@ -38,7 +38,7 @@ curses-like library [tcell](https://github.com/gdamore/tcell), which is
 installed automatically by the previous `go build` command.
 
 *Portability note.* If you want to avoid a dependency, try adding `--tags ansi`
-to the `go install` command. It will work on POSIX systems with a `stty` command,
+to the `go build` command. It will work on POSIX systems with a `stty` command,
 but has more limited functionality.
 
 ### Tiles
