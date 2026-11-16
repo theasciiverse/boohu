@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 func Replay(file string) error {
@@ -32,7 +33,7 @@ func Replay(file string) error {
 
 func (g *game) DataDir() (string, error) {
 	var xdg string
-	if os.Getenv("GOOS") == "windows" {
+	if runtime.GOOS == "windows" {
 		xdg = os.Getenv("LOCALAPPDATA")
 	} else {
 		xdg = os.Getenv("XDG_DATA_HOME")
