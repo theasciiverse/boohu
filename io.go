@@ -31,17 +31,33 @@ func Replay(file string) error {
 	return nil
 }
 
+// DataDir returns the game's data directory location, which holds the
+// save, config, replay and dump. On Windows it is %LOCALAPPDATA%\boohu.
+// Elsewhere it is the XDG state folder, $XDG_STATE_HOME/boohu (default
+// ~/.local/state/boohu), where per-user state such as saves belongs; a
+// folder left in the data folder ($XDG_DATA_HOME/boohu) by older versions
+// is moved there on first use.
 func (g *game) DataDir() (string, error) {
-	var xdg string
+	var dataDir string
 	if runtime.GOOS == "windows" {
-		xdg = os.Getenv("LOCALAPPDATA")
+		xdg := os.Getenv("LOCALAPPDATA")
+		if xdg == "" {
+			xdg = filepath.Join(os.Getenv("HOME"), ".local", "share")
+		}
+		dataDir = filepath.Join(xdg, "boohu")
 	} else {
-		xdg = os.Getenv("XDG_DATA_HOME")
+		dataDir = filepath.Join(xdgDir("XDG_STATE_HOME", ".local", "state"), "boohu")
+		oldDir := filepath.Join(xdgDir("XDG_DATA_HOME", ".local", "share"), "boohu")
+		if _, err := os.Stat(dataDir); err != nil {
+			if _, err := os.Stat(oldDir); err == nil {
+				if err := os.MkdirAll(filepath.Dir(dataDir), 0755); err == nil {
+					// on failure the old folder stays where it is and
+					// the game starts afresh in the new one
+					os.Rename(oldDir, dataDir)
+				}
+			}
+		}
 	}
-	if xdg == "" {
-		xdg = filepath.Join(os.Getenv("HOME"), ".local", "share")
-	}
-	dataDir := filepath.Join(xdg, "boohu")
 	_, err := os.Stat(dataDir)
 	if err != nil {
 		err = os.MkdirAll(dataDir, 0755)
@@ -50,6 +66,15 @@ func (g *game) DataDir() (string, error) {
 		}
 	}
 	return dataDir, nil
+}
+
+// xdgDir returns the XDG base directory named by env, or its default
+// under the home directory.
+func xdgDir(env string, def ...string) string {
+	if dir := os.Getenv(env); dir != "" {
+		return dir
+	}
+	return filepath.Join(append([]string{os.Getenv("HOME")}, def...)...)
 }
 
 func (g *game) Save() error {
